@@ -30,10 +30,12 @@ var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
-    .force("charge", d3.forceManyBody().strength(-150))//.distanceMax(400).distanceMin(200))
+    .force("charge", d3.forceManyBody().strength(-80))//.distanceMax(400).distanceMin(200))
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("data_science.json", function(error, graph) {
+//var data = "data_science_5.json";
+var data = "australia_5.json";
+d3.json(data, function(error, graph) {
   if (error) throw error;
 
   var link = svg.append("g")
@@ -41,7 +43,8 @@ d3.json("data_science.json", function(error, graph) {
     .selectAll("line")
     .data(graph.links)
     .enter().append("line")
-      .attr("stroke-width", function(d) { return Math.sqrt(d.value)/2; });
+      .attr("stroke-width", function(d) { return 1; });
+    // Math.sqrt(d.value)/2;
 
   var node = svg.append("g")
       .attr("class", "nodes")
